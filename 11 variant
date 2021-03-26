@@ -1,0 +1,203 @@
+#include <iostream>
+#include <ctime>
+#include <string.h>
+#include <ctype.h>
+#include <stdio.h>
+using namespace std;
+
+void hard()
+{
+    char line[255];
+    char fakenumber[255];
+    int j = 0;
+    
+    cout << "Input text: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(line, sizeof(line));
+
+    for (size_t i = 0; i < strlen(line); i++)
+    {
+        if (isdigit(line[i]))
+        {
+            fakenumber[j]=line[i];
+            fakenumber[j + 1] = '\0';   
+            j++;
+        }
+               
+    }
+    int number = atoi(fakenumber);
+   // cout << number<<endl;
+    char rim[] = { 'I','V','X' };
+    char rim2[255];
+    int f = 0;
+    for (size_t i = 0; i < 10; i++)
+    {
+        rim2[i + 1] = '\0';
+        if (number == 1)
+        {
+            rim2[i] = rim[0];
+            break;
+        }
+        if (number == 2)
+        {
+            rim2[i] = rim[0];           
+            if (i == 1)
+               break;
+        }
+        if (number == 3)
+        {       
+            rim2[i] = rim[0];
+            if (i == 2)
+                break;
+        }
+        if (number == 4)
+        {     
+            rim2[i] = rim[f];
+            f++;
+            if(i==1)
+            break;
+        }
+        if (number == 5)
+        {
+            rim2[i]=rim[1];
+                break;
+        }
+        if (number == 6)
+        {
+            rim2[i] = rim[f+1];
+            f--;
+            if(i==1)
+                break;
+        }
+        if (number == 7)
+        {
+            rim2[i] = rim[f + 1];
+                f=-1;
+            if (i == 2)
+                break;
+        }
+        if (number == 8)
+        {
+            rim2[i] = rim[f + 1];
+                f = -1;
+            if (i == 3)
+                break;
+        }
+        if (number == 9)
+        {
+            rim2[i] = rim[f];
+                f+=2;
+            if(i==1)
+                break;
+        }
+        if (number == 10)
+        {
+            rim2[i] = rim[2];
+            break;
+        }
+     
+    }
+    int c;
+    int temp = 0;
+    for (size_t i = 0; i < strlen(line); i++)
+    {
+        if (isdigit(line[i]))
+        {
+          
+            temp = i;
+            for (size_t j = 0; j < strlen(rim2); j++)
+            {
+                line[temp] = rim2[j];
+                temp++;
+                //line[strlen(line)] = line[strlen(line) - 1];
+            }
+           
+            
+        }
+        
+
+    }
+    cout << line;
+
+
+
+
+        
+    
+}
+
+void mid()
+{
+    int a = 0, b = 0, s = 0, sum1 = 0;
+    char line[255];
+    cout << "Input text: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(line, sizeof(line));
+
+    for (size_t i = 0; i < strlen(line); i++)
+    {
+        if (line[i] == line[i + 1])
+            a++;
+        if (line[i] != line[i + 1])
+        {
+            if (a > sum1)
+            {
+                sum1 = a;
+            }
+            a = 0;
+        }
+        
+    }
+    cout << "For the largest number of a: ";
+    cout << (sum1 == 0 ? sum1 : sum1+1);
+
+
+}
+
+void ez()
+{
+    //Дан масив символов определить количество * ; :
+    int a = 0, b = 0, s = 0;
+    char line[255];
+    cout << "Input text: ";
+    cin.ignore(std::cin.rdbuf()->in_avail());
+    cin.getline(line, sizeof(line));
+
+    for (size_t i = 0; i < strlen(line); i++)
+    {
+        if (line[i] == ';')
+        {
+            a++;
+        }
+        if (line[i] == '*')
+        {
+            b++;
+        }
+        if (line[i] == ':')
+        {
+            s++;
+        }
+    }
+
+    cout << "Your count ; - " << a << endl;
+    cout << "Your count * - " << b << endl;
+    cout << "Your count : - " << s << endl;
+
+}
+
+int main()
+{
+    setlocale(0, "ru");
+    cout << "Базовый уровень" << endl;
+    ez();
+    cout << "Средний уровень уровень" << endl;
+    mid();
+    cout << "Высокий уровень уровень" << endl;
+    hard();
+   
+
+
+
+    
+    
+}
